@@ -2574,7 +2574,10 @@ class Ui_ScrewMaker(object):
       # create circle
       circ=Part.makeCircle(cir_hex/2.0)
       # Create the face with the circle as outline and the hexagon as hole
-      face=Part.Face([Part.Wire(circ),hexagon])
+      facec=Part.Face([Part.Wire(circ)])
+      faceh=Part.Face([Part.Wire(hexagon)])
+      face=facec.cut(faceh)
+      # Part.show(face)
 
       # Extrude in z to create the final cutting tool
       exHex=face.extrude(Base.Vector(0.0,0.0,k_hex*1.1))
